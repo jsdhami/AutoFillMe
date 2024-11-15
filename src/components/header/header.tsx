@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { MenuIcon, XIcon } from '@heroicons/react/solid';
+import Image from 'next/image';
 // import Image from 'next/image';
 
 const Header = () => {
@@ -13,11 +14,11 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-gray-900 bg-gradient-to-b text-white h-24 py-4">
+    <header className="bg-gray-900 bg-gradient-to-b text-white pt-7 pb-6">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16 items-center">
           <div className="flex-shrink-0 rounded-full">
-            <img src='/logo.png' alt='Logo' className='w-20' />
+            <Link href="/" ><Image src='/logo.png' alt='Logo' width={100} height={100} className='w-20' /></Link>
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-4">
@@ -60,7 +61,7 @@ const Header = () => {
       </div>
 
       {isOpen && (
-        <div className="md:hidden" id="mobile-menu">
+        <div className="md:hidden shadow-sm bg-gray-950 mt-4 min-w-fit right-3 absolute rounded-sm " id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
             <Link
               href="/"
