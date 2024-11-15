@@ -5,7 +5,6 @@ import {
   FaDesktop,
   FaCalendarCheck,
 } from "react-icons/fa";
-import Header from "@/components/header/header";
 
 const About = () => {
   return (
@@ -80,7 +79,7 @@ const features = [
   },
 ];
 
-const FeatureCard = ({ icon, title, description }: any) => (
+const FeatureCard = ({ icon, title, description }: {icon: React.ReactNode, title: string, description: string}) => (
   <div className="bg-gray-800 rounded-xl p-6 flex flex-col items-center transition-transform transform hover:scale-105">
     {icon}
     <h3 className="text-xl font-bold mb-2">{title}</h3>
@@ -111,7 +110,7 @@ const howItWorks = [
   },
 ];
 
-const HowItWorksCard = ({ title, description }: any) => (
+const HowItWorksCard = ({ title, description }: {title: string, description: string}) => (
   <div>
     <h3 className="text-xl font-bold mb-2">{title}</h3>
     <p className="text-gray-400">{description}</p>

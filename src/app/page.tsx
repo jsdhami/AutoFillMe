@@ -4,7 +4,6 @@ import Footer from "@/components/footer/footer";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { FaRocket, FaInfoCircle, FaTachometerAlt, FaUser } from "react-icons/fa";
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -30,7 +29,7 @@ export default function Home() {
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-16">
           {features.map((feature) => (
-            <FeatureCard key={feature.title} icon={feature.icon} title={feature.title} description={feature.description} />
+            <Page key={feature.title} icon={feature.icon} title={feature.title} description={feature.description} />
           ))}
         </section>
       </main>
@@ -62,7 +61,7 @@ const features = [
   },
 ];
 
-const FeatureCard = ({ icon, title, description } : any ) => (
+const Page = ({ icon, title, description }: {icon: React.ReactNode, title: string, description: string}) => (
   <div className="bg-gray-800 rounded-xl p-6 flex items-center transition-transform transform hover:scale-105">
     <div className="mr-6">{icon}</div>
     <div>

@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Image from 'next/image';
 
 interface ExtractedData {
     text?: string; // Add other fields based on your API response
@@ -178,7 +179,7 @@ const Page: React.FC = () => {
                                     {capturedImage && (
                                         <div className="space-y-4">
                                             <div className="relative aspect-video w-full overflow-hidden rounded-lg">
-                                                <img src={capturedImage} alt="Captured document" className="h-full w-full object-cover" />
+                                                <Image src={capturedImage} width={100} height={100} alt="Captured document" className="h-full w-full object-cover"/>
                                             </div>
                                             <Button type="button" variant="outline" onClick={resetCapture} className="w-full">
                                                 <RefreshCcw className="mr-2 h-4 w-4" /> Retake
