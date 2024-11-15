@@ -82,7 +82,7 @@ export function NavUser({
             <UserRoundPen />
               <Link href="/dashboard/profile">Profile</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem onClick={() => signOut()}>
+            <DropdownMenuItem onClick={() => signOut({ redirectTo: "/" })}>
               <LogOut />
               Log out
             </DropdownMenuItem>
