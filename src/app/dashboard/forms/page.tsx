@@ -15,7 +15,7 @@ const Page = () => {
     "Address": "Kathmandu",
     "Phone number": "9808779843"  }
   // Handle changes to the input field
-  const change = (event) => {
+  const change = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormUrl(event.target.value)
   }
 

@@ -1,5 +1,4 @@
 "use client"
-
 import * as React from "react"
 import {
   BookOpen,
@@ -20,12 +19,6 @@ import {
 } from "@/components/ui/sidebar"
 
 const data = {
-  user: {
-    name: "Janak Dhami",
-    email: "info@example.com",
-    avatar: "/avatars/test.jpg",
-  },
-
   navMain: [
     {
       title: "Home",
@@ -63,7 +56,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
 
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser/>
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
