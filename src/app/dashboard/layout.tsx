@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react"
-// import { auth } from "../../../auth";
+import { auth } from "../../../auth";
 import { AppSidebar } from "@/components/app-sidebar"
 import {
     Breadcrumb,
@@ -27,9 +27,9 @@ export default async function DashboardLayout({
 }: {
     children: React.ReactNode
 }) {
-    // const session = await auth();
-    // change with !session to enable authentication
-    // if (session) return <div className="flex flex-col min-h-screen text-5xl text-white justify-center items-center font-bold">Not authenticated!😡</div>
+    const session = await auth();
+    change with !session to enable authentication
+    if (!session) return <div className="flex flex-col min-h-screen text-5xl text-white justify-center items-center font-bold">Not authenticated!😡</div>
     return (
         <>
             <SessionProvider>
