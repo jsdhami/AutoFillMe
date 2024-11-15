@@ -28,7 +28,7 @@ export default async function DashboardLayout({
     children: React.ReactNode
 }) {
     const session = await auth();
-    change with !session to enable authentication
+    // change with !session to enable authentication
     if (!session) return <div className="flex flex-col min-h-screen text-5xl text-white justify-center items-center font-bold">Not authenticated!😡</div>
     return (
         <>
