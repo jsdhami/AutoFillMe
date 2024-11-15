@@ -1,4 +1,5 @@
 "use client"
+import { signOut } from "next-auth/react"
 
 import {
    ChevronsUpDown,
@@ -81,7 +82,7 @@ export function NavUser({
             <UserRoundPen />
               <Link href="/dashboard/profile">Profile</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={() => signOut()}>
               <LogOut />
               Log out
             </DropdownMenuItem>
