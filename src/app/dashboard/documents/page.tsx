@@ -73,33 +73,6 @@ const Page: React.FC = () => {
     setIsCameraActive(false);
   };
 
-  const captureImage = (): void => {
-    if (!videoRef.current) return;
-    const canvas = document.createElement("canvas");
-    canvas.width = videoRef.current.videoWidth;
-    canvas.height = videoRef.current.videoHeight;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) {
-      setError("Failed to capture image");
-      return;
-    }
-    ctx.drawImage(videoRef.current, 0, 0);
-    canvas.toBlob(
-      (blob) => {
-        if (blob) {
-          const capturedFile = new File([blob], "captured-image.png", {
-            type: "image/png",
-          });
-          setCapturedImage(URL.createObjectURL(blob));
-          setFile(capturedFile);
-          stopCamera();
-        }
-      },
-      "image/png",
-      0.9
-    );
-  };
-
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
@@ -110,13 +83,6 @@ const Page: React.FC = () => {
     }
   };
 
-  const resetCapture = (): void => {
-    setCapturedImage(null);
-    setFile(null);
-    setError("");
-    setSuccess(false);
-    setExtractedData(null);
-  };
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
