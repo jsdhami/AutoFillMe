@@ -5,6 +5,7 @@ import {
   FileUser,
   Settings,
   House,
+  Blocks,
 } from "lucide-react"
 
 import { NavMain } from "@/components/nav-main"
@@ -40,6 +41,11 @@ const data = {
       title: "Settings",
       url: "/dashboard/settings",
       icon: Settings,
+    },
+    {
+      title: "Extension",
+      url: "/dashboard/extension",
+      icon: Blocks,
     },
   ],
 }
