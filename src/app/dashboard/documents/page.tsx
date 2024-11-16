@@ -8,6 +8,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Image from 'next/image';
+import { useSession } from "next-auth/react"
+
 
 interface ExtractedData {
     text?: string; // Add other fields based on your API response
@@ -76,12 +78,12 @@ const Page: React.FC = () => {
         ctx.drawImage(videoRef.current, 0, 0);
         canvas.toBlob((blob) => {
             if (blob) {
-                const capturedFile = new File([blob], 'captured-image.jpg', { type: 'image/jpeg' });
+                const capturedFile = new File([blob], 'captured-image.png', { type: 'image/png' });
                 setCapturedImage(URL.createObjectURL(blob));
                 setFile(capturedFile);
                 stopCamera();
             }
-        }, 'image/jpeg', 0.9);
+        }, 'image/png', 0.9);
     };
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -116,7 +118,7 @@ const Page: React.FC = () => {
         try {
             const formData = new FormData();
             formData.append('file', file);
-            const response = await fetch('/api/extract', { method: 'POST', body: formData });
+            const response = await fetch('http://172.27.7.162:8000/api/upload', { method: 'POST', body: formData });
             if (!response.ok) throw new Error('Failed to process file');
             
             const data: ExtractedData = await response.json();
@@ -133,15 +135,23 @@ const Page: React.FC = () => {
     useEffect(() => {
         return () => { stopCamera(); };
     }, []);
+     
+
+    // 
+    const { data: session } = useSession()
+    
 
     return (
-        <div className="flex min-h-screen items-center justify-center p-4 bg-gray-50">
+      <>
+      <div className="flex min-h-screen items-center justify-center p-4 bg-gray-50">
             <Card className="w-full max-w-md">
                 <CardHeader>
-                    <CardTitle>Document Extraction</CardTitle>
+                    <CardTitle>Data Extraction</CardTitle>
                     <CardDescription> Upload or capture a document to process the content. </CardDescription>
                 </CardHeader>
                 <form onSubmit={handleSubmit}>
+                    <input type="hidden"  name="email" value={session?.user?.email ?? ''} required />
+                    <input type="hidden" name="name" value={session?.user?.name ?? ''} required />
                     <CardContent className="space-y-4">
                         <Tabs defaultValue="upload" className="w-full">
                             <TabsList className="grid w-full grid-cols-2">
@@ -221,6 +231,7 @@ const Page: React.FC = () => {
                 </form>
             </Card>
         </div>
+      </>  
     );
 };
 
