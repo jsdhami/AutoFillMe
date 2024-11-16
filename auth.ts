@@ -5,7 +5,15 @@ import connectToDatabase from "./src/lib/db";
 import { createDynamicModel } from "./src/lib/schema/user_collection";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-    providers: [Google],
+    providers: [Google({
+        authorization: {
+          params: {
+            prompt: "consent",
+            access_type: "online",
+            response_type: "code",
+          },
+        },
+      }),],
     callbacks: {
         async signIn({ user }) {
             const email = user.email;
