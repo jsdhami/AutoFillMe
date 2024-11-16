@@ -1,5 +1,5 @@
 import NextAuth from "next-auth"
-// import GitHub from "next-auth/providers/github"
+import GitHub from "next-auth/providers/github"
 import Google from "next-auth/providers/google"
 import connectToDatabase from "./src/lib/db";
 import { createDynamicModel } from "./src/lib/schema/user_collection";
@@ -9,11 +9,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         authorization: {
           params: {
             prompt: "consent",
-            access_type: "online",
+            access_type: "offline",
             response_type: "code",
           },
         },
-      }),],
+      }), GitHub],
     callbacks: {
         async signIn({ user }) {
             const email = user.email;
