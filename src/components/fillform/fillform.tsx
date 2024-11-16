@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CloudCog } from "lucide-react";
+import Image from "next/image";
 
 const Fillform = () => {
   const { data: session } = useSession(); // Retrieve session info
@@ -64,7 +64,8 @@ const Fillform = () => {
   };
 
   return (
-    <div className="flex items-center justify-center p-8 bg-gray-50">
+    <div className="flex flex-col items-center justify-center p-8 bg-gray-50">
+      <div className="flex">
       <form
         onSubmit={handleSubmit}
         className="space-y-4 p-6 bg-white shadow-lg rounded-md max-w-md w-full"
@@ -101,8 +102,9 @@ const Fillform = () => {
           {loading ? "Submitting..." : "Submit"}
         </Button>
       </form>
-      <div className="">
-        <img src={image} alt="gg" />
+      </div>
+      <div className="flex">
+        <Image src={image} height={500} width={500} alt="gg" />
       </div>
     </div>
   );
