@@ -1,12 +1,10 @@
 import React from 'react'
 import Fillform from '@/components/fillform/fillform'
-// import { TotalUploaded } from '@/components/charts/totalUploaded/totalUploaded'
 const page = () => {
   return (
     <>
       <div className="grid auto-rows-min gap-4 md:grid-cols-3">
         <div className="aspect-video rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50" >
-        {/* <TotalUploaded /> */}
        
         </div>
         <div className="aspect-video rounded-xl bg-zinc-100/50 dark:bg-zinc-800/50" >

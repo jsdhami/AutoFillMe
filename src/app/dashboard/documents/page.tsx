@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { AlertCircle, Loader2, Camera} from "lucide-react";
+import { AlertCircle, Loader2, Camera, RefreshCcw } from "lucide-react";
 import {
   Alert,
   AlertDescription,
@@ -73,6 +74,33 @@ const Page: React.FC = () => {
     setIsCameraActive(false);
   };
 
+  const captureImage = (): void => {
+    if (!videoRef.current) return;
+    const canvas = document.createElement("canvas");
+    canvas.width = videoRef.current.videoWidth;
+    canvas.height = videoRef.current.videoHeight;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      setError("Failed to capture image");
+      return;
+    }
+    ctx.drawImage(videoRef.current, 0, 0);
+    canvas.toBlob(
+      (blob) => {
+        if (blob) {
+          const capturedFile = new File([blob], "captured-image.png", {
+            type: "image/png",
+          });
+          setCapturedImage(URL.createObjectURL(blob));
+          setFile(capturedFile);
+          stopCamera();
+        }
+      },
+      "image/png",
+      0.9
+    );
+  };
+
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
@@ -83,6 +111,13 @@ const Page: React.FC = () => {
     }
   };
 
+  const resetCapture = (): void => {
+    setCapturedImage(null);
+    setFile(null);
+    setError("");
+    setSuccess(false);
+    setExtractedData(null);
+  };
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
@@ -103,15 +138,13 @@ const Page: React.FC = () => {
       formData.append("name", session.user.name || "");
       formData.append("email", session.user.email || "");
 
-      const response = await fetch("http://127.0.0.1:8000/api/upload", {
+      const response = await fetch("http://172.27.7.162:8000/api/upload", {
         method: "POST",
         body: formData,
       });
-
       if (!response.ok) throw new Error("Failed to process file");
 
       const data: ExtractedData = await response.json();
-      
       setExtractedData(data);
       setSuccess(true);
     } catch (err) {
@@ -151,7 +184,7 @@ const Page: React.FC = () => {
                   id="file"
                   type="file"
                   onChange={handleFileChange}
-                  accept=".pdf, image/*"
+                  accept=".pdf,.doc,.docx,image/*"
                 />
               </TabsContent>
               <TabsContent value="camera" className="space-y-4">
@@ -188,9 +221,9 @@ const Page: React.FC = () => {
               </Alert>
             )}
             {extractedData && (
-              <div className="p-4 bg-gray-100 rounded-lg text-wrap">
+              <div className="p-4 bg-gray-100 rounded-lg">
                 <h3 className="font-semibold">Extracted Content</h3>
-                <pre className="text-wrap w-fit ">{JSON.stringify(extractedData, null, 2)}</pre>
+                <pre>{JSON.stringify(extractedData, null, 2)}</pre>
               </div>
             )}
           </CardContent>

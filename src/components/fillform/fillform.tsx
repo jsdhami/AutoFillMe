@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Image from "next/image";
 
 const Fillform = () => {
   const { data: session } = useSession(); // Retrieve session info
@@ -12,7 +11,6 @@ const Fillform = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
-  const [image, setImage] = useState("");
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -50,10 +48,6 @@ const Fillform = () => {
         throw new Error("Failed to submit the form");
       }
      
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      setImage(url)
-
       setSuccess(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -103,9 +97,9 @@ const Fillform = () => {
         </Button>
       </form>
       </div>
-      <div className="flex">
+      {/* <div className="flex">
         <Image src={image} height={500} width={500} alt="gg" />
-      </div>
+      </div> */}
     </div>
   );
 };
