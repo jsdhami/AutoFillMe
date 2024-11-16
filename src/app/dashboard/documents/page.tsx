@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useEffect } from "react";
-import { AlertCircle, Loader2, Camera, RefreshCcw } from "lucide-react";
+import { AlertCircle, Loader2, Camera} from "lucide-react";
 import {
   Alert,
   AlertDescription,

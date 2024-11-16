@@ -166,7 +166,7 @@ const Documentfetch: React.FC = () => {
       <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-md">
         <h1 className="text-2xl font-bold text-gray-800 mb-4">Upload Your Document</h1>
         <p className="text-gray-600 mb-6">
-          Upload a file associated with your account. Ensure you're logged in.
+          Upload a file associated with your account. Ensure you are logged in.
         </p>
         <div>
           <label
